@@ -1,347 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khushbu Bang – Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
 
-<title>Khushbu Bang | Data Engineer</title>
+        /* Main content */
+        .main {
+            flex: 1;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        h3 {
+            font-size: 18px;
+            color: #34495e;
+        }
+        .dates {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        ul {
+            margin: 10px 0 20px 20px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-
-body{
-margin:0;
-font-family:Poppins;
-background:#0f172a;
-color:white;
-overflow-x:hidden;
-}
-
-#particles-js{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
-}
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-background:#020617;
-padding:15px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:20px;
-text-decoration:none;
-font-weight:600;
-}
-
-header{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-header h1{
-font-size:60px;
-}
-
-.typing{
-font-size:24px;
-margin-top:10px;
-color:#60a5fa;
-}
-
-.btn{
-margin-top:30px;
-padding:14px 30px;
-border-radius:30px;
-border:none;
-background:#2563eb;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-section{
-padding:100px 20px;
-max-width:1100px;
-margin:auto;
-}
-
-h2{
-text-align:center;
-margin-bottom:50px;
-}
-
-.card{
-background:#1e293b;
-padding:25px;
-border-radius:10px;
-margin-bottom:20px;
-}
-
-.skills{
-max-width:700px;
-margin:auto;
-}
-
-.skill-bar{
-margin-bottom:20px;
-}
-
-.bar{
-background:#334155;
-height:10px;
-border-radius:10px;
-}
-
-.fill{
-height:10px;
-background:#3b82f6;
-border-radius:10px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
-
-.project{
-background:#1e293b;
-padding:25px;
-border-radius:10px;
-transition:0.3s;
-}
-
-.project:hover{
-transform:translateY(-8px);
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-}
-
-</style>
-
+        /* Collapsible */
+        .collapsible {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .collapsible:hover {
+            background-color: #dfe6e9;
+        }
+        .active, .collapsible:after {
+            font-weight: bold;
+        }
+        .content {
+            padding: 0 15px;
+            display: none;
+            overflow: hidden;
+            background-color: #f5f7fa;
+            border-left: 2px solid #2c3e50;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-
 <body>
-
-<div id="particles-js"></div>
-
-<nav>
-
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-
-</nav>
-
-<header>
-
-<h1>Khushbu Bang</h1>
-
-<div class="typing" id="typing"></div>
-
-<button class="btn">Download Resume</button>
-
-</header>
-
-<section id="about">
-
-<h2>About</h2>
-
-<div class="card">
-
-Senior Data Engineer with **12+ years experience** delivering enterprise data platforms across banking, insurance and higher education.
-
-Currently working at **Monash University** on the **Student Management System Transformation (SMST)** program implementing **Ellucian Banner SaaS**.
-
-Supporting the **data migration team** responsible for large-scale transformation of student administration data.
-
-</div>
-
-</section>
-
-<section id="skills">
-
-<h2>Skills</h2>
-
-<div class="skills">
-
-<div class="skill-bar">
-
-Python
-
-<div class="bar">
-
-<div class="fill" style="width:90%"></div>
-
-</div>
-
-</div>
-
-<div class="skill-bar">
-
-SQL
-
-<div class="bar">
-
-<div class="fill" style="width:95%"></div>
-
-</div>
-
-</div>
-
-<div class="skill-bar">
-
-Databricks / PySpark
-
-<div class="bar">
-
-<div class="fill" style="width:90%"></div>
-
-</div>
-
-</div>
-
-<div class="skill-bar">
-
-Cloud Data Platforms
-
-<div class="bar">
-
-<div class="fill" style="width:85%"></div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="projects">
-
-<h2>Projects</h2>
-
-<div class="grid">
-
-<div class="project">
-
-<h3>SMST Data Migration</h3>
-
-Large-scale migration supporting Monash University's Ellucian Banner SaaS transformation.
-
-</div>
-
-<div class="project">
-
-<h3>Databricks ETL Pipelines</h3>
-
-Built scalable ETL pipelines improving efficiency by 40%.
-
-</div>
-
-<div class="project">
-
-<h3>Cloud Migration</h3>
-
-Migrated Teradata workloads to cloud platforms improving performance.
-
-</div>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<div class="card">
-
-Email: khushbu.malani@hotmail.com  
-<br><br>
-Phone: 0449 021 700  
-<br><br>
-LinkedIn:  
-<br>
-<a href="https://www.linkedin.com/in/KBMalani" style="color:#60a5fa">linkedin.com/in/KBMalani</a>
-
-</div>
-
-</section>
-
-<footer>
-
-© 2026 Khushbu Bang
-
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-
-<script>
-
-particlesJS.load('particles-js','https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json')
-
-const text=["Senior Data Engineer","Cloud Data Specialist","Databricks Engineer","Data Platform Architect"]
-
-let i=0
-let j=0
-let current=""
-let isDeleting=false
-
-function type(){
-
-current=text[i]
-
-if(isDeleting){
-j--
-}else{
-j++
-}
-
-document.getElementById("typing").textContent=current.substring(0,j)
-
-if(!isDeleting && j===current.length){
-isDeleting=true
-setTimeout(type,1500)
-return
-}
-
-if(isDeleting && j===0){
-isDeleting=false
-i++
-if(i===text.length){
-i=0
-}
-}
-
-setTimeout(type,isDeleting?50:100)
-
-}
-
-type()
-
-</script>
-
+    <div class="sidebar">
+        <h2>Khushbu Bang</h2>
+        <a href="#monash">Monash University</a>
+        <a href="#anz">ANZ Bank</a>
+        <a href="#aia">AIA Australia</a>
+        <a href="#techmahindra">Tech Mahindra</a>
+        <a href="#ibm">IBM India</a>
+    </div>
+
+    <div class="main">
+        <h1>Professional Experience</h1>
+
+        <button class="collapsible" id="monash">Monash University – Dec 2025 – Present</button>
+        <div class="content">
+            <h3>Supporting the Student Management System Transformation (SMST) program</h3>
+            <ul>
+                <li>Supported large-scale data migration to Ellucian Banner SaaS, ensuring seamless transition from legacy systems.</li>
+                <li>Streamlined and optimized transformation pipelines by consolidating multiple Databricks notebooks into a single master pipeline and parameterizing datasets, improving efficiency and flexibility.</li>
+                <li>Collaborated with Business Analysts to understand source Callista data and transform it according to system requirements.</li>
+                <li>Conducted data validation and reconciliation, ensuring high accuracy and integrity across datasets.</li>
+                <li>Partnered with cross-functional teams to coordinate migration efforts and resolve complex data challenges.</li>
+            </ul>
+        </div>
+
+        <button class="collapsible" id="anz">ANZ Bank – Sep 2022 – Dec 2025</button>
+        <div class="content">
+            <h3>Senior Data Engineer / Data Analyst – Home Loans Acquisition & Retention</h3>
+            <ul>
+                <li>Partnered with business stakeholders to design and deliver data solutions supporting customer acquisition and retention initiatives.</li>
+                <li>Developed DAGs using Python, Airflow, and dbt for ETL, transformation, analysis, and pipeline orchestration.</li>
+                <li>Worked on Medallion architecture, designing pipeline-focused layers from raw to curated data for analytics-ready datasets.</li>
+                <li>Migrated workloads with up to 40% faster query performance, reducing manual effort.</li>
+                <li>Upgraded cleanup auto-approval process from Excel-based manual checks to automated rule-based validation, achieving 95% match accuracy.</li>
+                <li>Designed and optimized SQL queries, reusable views, and automated data integrity checks.</li>
+                <li>Built centralized Offer asset to prevent double payments and enable visibility across business lines.</li>
+                <li>Mentored colleagues on SQL optimization, Python best practices, and pipeline design standards.</li>
+                <li>Contributed to Teradata workload decommissioning supporting ANZ's cloud migration journey.</li>
+                <li>Built and optimized ETL pipelines in Databricks using Airflow, Python, SQL, and dbt, improving efficiency by 30–40%.</li>
+            </ul>
+        </div>
+
+        <button class="collapsible" id="aia">AIA Australia Ltd – Aug 2016 – Aug 2022</button>
+        <div class="content">
+            <h3>Senior Data Engineer (EDS DataStage Developer)</h3>
+            <ul>
+                <li>Analysed and integrated data from multiple source systems into the data warehouse for BI reporting and analytics.</li>
+                <li>Designed ETL workflows for initial and delta loads, ensuring efficient daily data refresh.</li>
+                <li>Developed DataStage jobs handling XML files, format conversions, complex transformations, and slowly changing dimensions.</li>
+                <li>Implemented real-time data replication and enhanced data lake capabilities.</li>
+                <li>Built and maintained ETL pipelines using Azure Data Factory, Spark SQL, T-SQL, and Azure Data Lake Analytics.</li>
+                <li>Delivered multiple projects on strict timelines with minimal defects and introduced automated processes improving data quality.</li>
+            </ul>
+        </div>
+
+        <button class="collapsible" id="techmahindra">Tech Mahindra – Mar 2016 – Jul 2016</button>
+        <div class="content">
+            <h3>ETL Developer (DataStage Specialist) – Coles Supermarkets</h3>
+            <ul>
+                <li>Designed and developed DataStage jobs for integration projects.</li>
+                <li>Coordinated deployments across SIT/SVT using Control-M.</li>
+                <li>Worked with secure file transfers (SFTP, GPG encryption/decryption).</li>
+            </ul>
+        </div>
+
+        <button class="collapsible" id="ibm">IBM India Pvt Ltd – Apr 2012 – Mar 2016</button>
+        <div class="content">
+            <h3>ETL Developer / Teradata DBA – ANZ Bank / Vodafone UK</h3>
+            <ul>
+                <li>Built ETL jobs integrating Oracle, SQL Server, XML, and flat files into Teradata DW.</li>
+                <li>Supported dimensional modelling and performance tuning.</li>
+                <li>Managed database administration including user management, space allocation, and environment clean-up.</li>
+                <li>Delivered multiple enhancements and production fixes within SLA.</li>
+                <li>Improved Teradata environment performance via proactive clean-up.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        const collapsibles = document.querySelectorAll('.collapsible');
+        collapsibles.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const content = button.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
