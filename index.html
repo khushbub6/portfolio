@@ -24,6 +24,23 @@ color:white;
 scroll-behavior:smooth;
 }
 
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#020617;
+padding:15px;
+text-align:center;
+z-index:1000;
+}
+
+nav a{
+color:white;
+margin:20px;
+text-decoration:none;
+font-weight:600;
+}
+
 header{
 height:100vh;
 display:flex;
@@ -32,22 +49,15 @@ justify-content:center;
 align-items:center;
 text-align:center;
 background:linear-gradient(135deg,#2563eb,#9333ea);
-animation:gradient 8s infinite alternate;
-}
-
-@keyframes gradient{
-0%{background:linear-gradient(135deg,#2563eb,#9333ea);}
-100%{background:linear-gradient(135deg,#0ea5e9,#6366f1);}
 }
 
 header h1{
 font-size:56px;
 }
 
-header p{
-font-size:20px;
-margin-top:10px;
-opacity:.9;
+header h2{
+margin-top:15px;
+font-weight:300;
 }
 
 .btn{
@@ -66,23 +76,6 @@ transition:.3s;
 transform:scale(1.1);
 }
 
-nav{
-position:fixed;
-top:0;
-width:100%;
-background:#020617;
-padding:15px;
-text-align:center;
-z-index:1000;
-}
-
-nav a{
-color:white;
-margin:20px;
-text-decoration:none;
-font-weight:600;
-}
-
 section{
 padding:100px 20px;
 max-width:1100px;
@@ -95,22 +88,23 @@ margin-bottom:50px;
 font-size:36px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
-
 .card{
 background:#1e293b;
 padding:25px;
 border-radius:10px;
 transition:.3s;
+margin-bottom:20px;
 }
 
 .card:hover{
-transform:translateY(-10px);
+transform:translateY(-8px);
 background:#334155;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
 }
 
 .skills{
@@ -126,6 +120,15 @@ padding:10px 18px;
 border-radius:20px;
 }
 
+.timeline{
+border-left:3px solid #6366f1;
+padding-left:20px;
+}
+
+.timeline-item{
+margin-bottom:40px;
+}
+
 .contact{
 text-align:center;
 }
@@ -137,6 +140,7 @@ background:#020617;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -144,6 +148,7 @@ background:#020617;
 <nav>
 <a href="#about">About</a>
 <a href="#skills">Skills</a>
+<a href="#experience">Experience</a>
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
 </nav>
@@ -152,7 +157,7 @@ background:#020617;
 
 <h1>Khushbu Bang</h1>
 
-<p>Senior Data Engineer | Data Platforms | Cloud | Databricks</p>
+<h2>Senior Data Engineer | Cloud Data Platforms</h2>
 
 <button class="btn" onclick="document.getElementById('about').scrollIntoView()">
 Explore My Work
@@ -168,109 +173,11 @@ Explore My Work
 
 <p>
 
-Senior Data Engineer with **12+ years experience** across banking and insurance industries.
+Senior Data Engineer with **12+ years experience** delivering scalable data platforms in banking, insurance and higher education.
 
-Specialized in building **data platforms, ETL pipelines, and analytics-ready datasets** using modern cloud technologies.
+Currently working at **Monash University** supporting the **Student Management System Transformation (SMST)** program — a large-scale digital transformation implementing **Ellucian Banner SaaS**.
 
-Currently working at **ANZ Bank**, delivering scalable data pipelines supporting customer acquisition and retention programs.
+My work focuses on **data migration, large-scale data transformation, and building analytics-ready datasets** to support modern reporting and student administration systems.
 
-Experienced with **Databricks, Airflow, Python, SQL, Azure, AWS, and BigQuery**.
-
-</p>
-
-</div>
-
-</section>
-
-<section id="skills">
-
-<h2>Skills</h2>
-
-<div class="skills">
-
-<div class="skill">Databricks</div>
-<div class="skill">Python</div>
-<div class="skill">PySpark</div>
-<div class="skill">SQL</div>
-<div class="skill">Airflow</div>
-<div class="skill">Azure Data Factory</div>
-<div class="skill">Delta Lake</div>
-<div class="skill">AWS Glue</div>
-<div class="skill">BigQuery</div>
-<div class="skill">Oracle</div>
-<div class="skill">Teradata</div>
-<div class="skill">Redshift</div>
-
-</div>
-
-</section>
-
-<section id="projects">
-
-<h2>Projects</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Databricks ETL Pipelines</h3>
-<p>
-Designed scalable ETL pipelines using Databricks, Airflow and Python reducing manual effort by 40%.
-</p>
-</div>
-
-<div class="card">
-<h3>Cloud Migration</h3>
-<p>
-Migrated Teradata workloads to cloud data platforms improving query performance by 40%.
-</p>
-</div>
-
-<div class="card">
-<h3>Automated Data Validation</h3>
-<p>
-Developed automated rule-based validation pipelines replacing manual Excel processes with 95% accuracy.
-</p>
-</div>
-
-<div class="card">
-<h3>Medallion Data Architecture</h3>
-<p>
-Designed Bronze, Silver, Gold layers to build analytics-ready datasets for business intelligence teams.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<div class="card contact">
-
-<p>📧 khushbu.malani@hotmail.com</p>
-
-<p>📱 0449 021 700</p>
-
-<p>
-LinkedIn  
-<br>
-<a href="https://www.linkedin.com/in/KBMalani" style="color:#60a5fa">
-linkedin.com/in/KBMalani
-</a>
-</p>
-
-</div>
-
-</section>
-
-<footer>
-
-<p>© 2026 Khushbu Bang</p>
-
-</footer>
-
-</body>
-</html>
+Previously delivered major data solutions at **ANZ Bank and AIA Australia**, specialising in ETL
 ```
