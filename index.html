@@ -1,41 +1,79 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Khushbu Bang | Data Engineer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
-body{
-font-family: 'Segoe UI', sans-serif;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
 background:#0f172a;
 color:white;
+scroll-behavior:smooth;
 }
 
 header{
-padding:60px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
 background:linear-gradient(135deg,#2563eb,#9333ea);
+animation:gradient 8s infinite alternate;
+}
+
+@keyframes gradient{
+0%{background:linear-gradient(135deg,#2563eb,#9333ea);}
+100%{background:linear-gradient(135deg,#0ea5e9,#6366f1);}
 }
 
 header h1{
-font-size:48px;
-margin-bottom:10px;
+font-size:56px;
 }
 
 header p{
 font-size:20px;
-opacity:0.9;
+margin-top:10px;
+opacity:.9;
+}
+
+.btn{
+margin-top:30px;
+padding:14px 28px;
+border:none;
+border-radius:30px;
+background:white;
+color:#111;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
 }
 
 nav{
-text-align:center;
+position:fixed;
+top:0;
+width:100%;
 background:#020617;
 padding:15px;
-position:sticky;
-top:0;
+text-align:center;
+z-index:1000;
 }
 
 nav a{
@@ -46,20 +84,20 @@ font-weight:600;
 }
 
 section{
-padding:80px 20px;
+padding:100px 20px;
 max-width:1100px;
 margin:auto;
 }
 
 h2{
 text-align:center;
-margin-bottom:40px;
-font-size:32px;
+margin-bottom:50px;
+font-size:36px;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px;
 }
 
@@ -67,11 +105,11 @@ gap:25px;
 background:#1e293b;
 padding:25px;
 border-radius:10px;
-transition:0.3s;
+transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
+transform:translateY(-10px);
 background:#334155;
 }
 
@@ -96,18 +134,12 @@ footer{
 text-align:center;
 padding:30px;
 background:#020617;
-margin-top:60px;
 }
 
 </style>
 </head>
 
 <body>
-
-<header>
-<h1>Khushbu Bang</h1>
-<p>Data Engineer | Databricks | SQL | PySpark | Data Pipelines</p>
-</header>
 
 <nav>
 <a href="#about">About</a>
@@ -116,17 +148,36 @@ margin-top:60px;
 <a href="#contact">Contact</a>
 </nav>
 
+<header>
+
+<h1>Khushbu Bang</h1>
+
+<p>Senior Data Engineer | Data Platforms | Cloud | Databricks</p>
+
+<button class="btn" onclick="document.getElementById('about').scrollIntoView()">
+Explore My Work
+</button>
+
+</header>
+
 <section id="about">
 
 <h2>About Me</h2>
 
 <div class="card">
+
 <p>
-I am a Data Engineer specializing in building scalable data pipelines and
-data migration frameworks using Databricks, Spark, and SQL.
-I enjoy solving complex data engineering challenges and designing
-reliable ETL pipelines.
+
+Senior Data Engineer with **12+ years experience** across banking and insurance industries.
+
+Specialized in building **data platforms, ETL pipelines, and analytics-ready datasets** using modern cloud technologies.
+
+Currently working at **ANZ Bank**, delivering scalable data pipelines supporting customer acquisition and retention programs.
+
+Experienced with **Databricks, Airflow, Python, SQL, Azure, AWS, and BigQuery**.
+
 </p>
+
 </div>
 
 </section>
@@ -138,13 +189,17 @@ reliable ETL pipelines.
 <div class="skills">
 
 <div class="skill">Databricks</div>
+<div class="skill">Python</div>
 <div class="skill">PySpark</div>
 <div class="skill">SQL</div>
-<div class="skill">Python</div>
+<div class="skill">Airflow</div>
+<div class="skill">Azure Data Factory</div>
+<div class="skill">Delta Lake</div>
+<div class="skill">AWS Glue</div>
+<div class="skill">BigQuery</div>
 <div class="skill">Oracle</div>
-<div class="skill">Data Engineering</div>
-<div class="skill">ETL Pipelines</div>
-<div class="skill">Data Migration</div>
+<div class="skill">Teradata</div>
+<div class="skill">Redshift</div>
 
 </div>
 
@@ -157,26 +212,30 @@ reliable ETL pipelines.
 <div class="grid">
 
 <div class="card">
-<h3>Oracle Data Migration Framework</h3>
+<h3>Databricks ETL Pipelines</h3>
 <p>
-Built a PySpark framework that migrates data from Databricks to Oracle
-with automatic column length validation and metadata-driven truncation.
+Designed scalable ETL pipelines using Databricks, Airflow and Python reducing manual effort by 40%.
 </p>
 </div>
 
 <div class="card">
-<h3>Data Validation Engine</h3>
+<h3>Cloud Migration</h3>
 <p>
-Developed automated validation pipelines to detect schema mismatches,
-null violations, and length issues before loading data.
+Migrated Teradata workloads to cloud data platforms improving query performance by 40%.
 </p>
 </div>
 
 <div class="card">
-<h3>Metadata Driven ETL</h3>
+<h3>Automated Data Validation</h3>
 <p>
-Created reusable ETL pipelines in Databricks using metadata tables
-to automate ingestion across multiple datasets.
+Developed automated rule-based validation pipelines replacing manual Excel processes with 95% accuracy.
+</p>
+</div>
+
+<div class="card">
+<h3>Medallion Data Architecture</h3>
+<p>
+Designed Bronze, Silver, Gold layers to build analytics-ready datasets for business intelligence teams.
 </p>
 </div>
 
@@ -189,9 +248,19 @@ to automate ingestion across multiple datasets.
 <h2>Contact</h2>
 
 <div class="card contact">
-<p>Email: khushbu.bang@monash.edu</p>
-<p>LinkedIn: Add your LinkedIn link</p>
-<p>GitHub: Add your GitHub link</p>
+
+<p>📧 khushbu.malani@hotmail.com</p>
+
+<p>📱 0449 021 700</p>
+
+<p>
+LinkedIn  
+<br>
+<a href="https://www.linkedin.com/in/KBMalani" style="color:#60a5fa">
+linkedin.com/in/KBMalani
+</a>
+</p>
+
 </div>
 
 </section>
@@ -204,3 +273,4 @@ to automate ingestion across multiple datasets.
 
 </body>
 </html>
+```
