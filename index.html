@@ -1,7 +1,9 @@
-```html
+```html id="l4n6qa"
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,17 +13,19 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins;
-}
-
 body{
+margin:0;
+font-family:Poppins;
 background:#0f172a;
 color:white;
-scroll-behavior:smooth;
+overflow-x:hidden;
+}
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
 }
 
 nav{
@@ -31,7 +35,6 @@ width:100%;
 background:#020617;
 padding:15px;
 text-align:center;
-z-index:1000;
 }
 
 nav a{
@@ -48,32 +51,27 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:linear-gradient(135deg,#2563eb,#9333ea);
 }
 
 header h1{
-font-size:56px;
+font-size:60px;
 }
 
-header h2{
-margin-top:15px;
-font-weight:300;
+.typing{
+font-size:24px;
+margin-top:10px;
+color:#60a5fa;
 }
 
 .btn{
 margin-top:30px;
-padding:14px 28px;
-border:none;
+padding:14px 30px;
 border-radius:30px;
-background:white;
-color:#111;
-font-weight:600;
+border:none;
+background:#2563eb;
+color:white;
+font-size:16px;
 cursor:pointer;
-transition:.3s;
-}
-
-.btn:hover{
-transform:scale(1.1);
 }
 
 section{
@@ -85,20 +83,34 @@ margin:auto;
 h2{
 text-align:center;
 margin-bottom:50px;
-font-size:36px;
 }
 
 .card{
 background:#1e293b;
 padding:25px;
 border-radius:10px;
-transition:.3s;
 margin-bottom:20px;
 }
 
-.card:hover{
-transform:translateY(-8px);
+.skills{
+max-width:700px;
+margin:auto;
+}
+
+.skill-bar{
+margin-bottom:20px;
+}
+
+.bar{
 background:#334155;
+height:10px;
+border-radius:10px;
+}
+
+.fill{
+height:10px;
+background:#3b82f6;
+border-radius:10px;
 }
 
 .grid{
@@ -107,77 +119,9 @@ grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px;
 }
 
-.skills{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-}
-
-.skill{
-background:#2563eb;
-padding:10px 18px;
-border-radius:20px;
-}
-
-.timeline{
-border-left:3px solid #6366f1;
-padding-left:20px;
-}
-
-.timeline-item{
-margin-bottom:40px;
-}
-
-.contact{
-text-align:center;
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<nav>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#experience">Experience</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<header>
-
-<h1>Khushbu Bang</h1>
-
-<h2>Senior Data Engineer | Cloud Data Platforms</h2>
-
-<button class="btn" onclick="document.getElementById('about').scrollIntoView()">
-Explore My Work
-</button>
-
-</header>
-
-<section id="about">
-
-<h2>About Me</h2>
-
-<div class="card">
-
-<p>
-
-Senior Data Engineer with **12+ years experience** delivering scalable data platforms in banking, insurance and higher education.
-
-Currently working at **Monash University** supporting the **Student Management System Transformation (SMST)** program — a large-scale digital transformation implementing **Ellucian Banner SaaS**.
-
-My work focuses on **data migration, large-scale data transformation, and building analytics-ready datasets** to support modern reporting and student administration systems.
-
-Previously delivered major data solutions at **ANZ Bank and AIA Australia**, specialising in ETL
+.project{
+background:#1e293b;
+padding:25px;
+border-radius:10px;
+transiti
 ```
