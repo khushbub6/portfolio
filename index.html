@@ -123,5 +123,225 @@ gap:25px;
 background:#1e293b;
 padding:25px;
 border-radius:10px;
-transiti
+transition:0.3s;
+}
+
+.project:hover{
+transform:translateY(-8px);
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#020617;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+
+<nav>
+
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+<header>
+
+<h1>Khushbu Bang</h1>
+
+<div class="typing" id="typing"></div>
+
+<button class="btn">Download Resume</button>
+
+</header>
+
+<section id="about">
+
+<h2>About</h2>
+
+<div class="card">
+
+Senior Data Engineer with **12+ years experience** delivering enterprise data platforms across banking, insurance and higher education.
+
+Currently working at **Monash University** on the **Student Management System Transformation (SMST)** program implementing **Ellucian Banner SaaS**.
+
+Supporting the **data migration team** responsible for large-scale transformation of student administration data.
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2>Skills</h2>
+
+<div class="skills">
+
+<div class="skill-bar">
+
+Python
+
+<div class="bar">
+
+<div class="fill" style="width:90%"></div>
+
+</div>
+
+</div>
+
+<div class="skill-bar">
+
+SQL
+
+<div class="bar">
+
+<div class="fill" style="width:95%"></div>
+
+</div>
+
+</div>
+
+<div class="skill-bar">
+
+Databricks / PySpark
+
+<div class="bar">
+
+<div class="fill" style="width:90%"></div>
+
+</div>
+
+</div>
+
+<div class="skill-bar">
+
+Cloud Data Platforms
+
+<div class="bar">
+
+<div class="fill" style="width:85%"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2>Projects</h2>
+
+<div class="grid">
+
+<div class="project">
+
+<h3>SMST Data Migration</h3>
+
+Large-scale migration supporting Monash University's Ellucian Banner SaaS transformation.
+
+</div>
+
+<div class="project">
+
+<h3>Databricks ETL Pipelines</h3>
+
+Built scalable ETL pipelines improving efficiency by 40%.
+
+</div>
+
+<div class="project">
+
+<h3>Cloud Migration</h3>
+
+Migrated Teradata workloads to cloud platforms improving performance.
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<div class="card">
+
+Email: khushbu.malani@hotmail.com  
+<br><br>
+Phone: 0449 021 700  
+<br><br>
+LinkedIn:  
+<br>
+<a href="https://www.linkedin.com/in/KBMalani" style="color:#60a5fa">linkedin.com/in/KBMalani</a>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Khushbu Bang
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script>
+
+particlesJS.load('particles-js','https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json')
+
+const text=["Senior Data Engineer","Cloud Data Specialist","Databricks Engineer","Data Platform Architect"]
+
+let i=0
+let j=0
+let current=""
+let isDeleting=false
+
+function type(){
+
+current=text[i]
+
+if(isDeleting){
+j--
+}else{
+j++
+}
+
+document.getElementById("typing").textContent=current.substring(0,j)
+
+if(!isDeleting && j===current.length){
+isDeleting=true
+setTimeout(type,1500)
+return
+}
+
+if(isDeleting && j===0){
+isDeleting=false
+i++
+if(i===text.length){
+i=0
+}
+}
+
+setTimeout(type,isDeleting?50:100)
+
+}
+
+type()
+
+</script>
+
+</body>
+</html>
 ```
