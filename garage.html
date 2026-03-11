@@ -1,0 +1,240 @@
+import { useState } from "react";
+
+const SCALE = 8; // pixels per unit
+
+export default function GaragePlan() {
+  const [showDimensions, setShowDimensions] = useState(true);
+  const [showFurniture, setShowFurniture] = useState(true);
+
+  // Garage dimensions
+  const W = 63; // width (horizontal)
+  const H = 37; // height (vertical)
+
+  // Opening: from 20 to 40 on the left wall (63-unit side)
+  // Opening is on the LEFT side wall (the 37-unit side... wait)
+  // "one side of 63 wall" = one of the 63-unit long walls
+  // Opening from 20 to 40 = 20 units wide, positioned at x=20 to x=40
+  const openStart = 20;
+  const openEnd = 40;
+  const openWidth = openEnd - openStart; // = 20 units
+
+  const pad = 60; // canvas padding for labels
+
+  const canvasW = W * SCALE + pad * 2;
+  const canvasH = H * SCALE + pad * 2 + 80;
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      background: "#1a1a2e",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "'Courier New', monospace",
+      padding: 24,
+    }}>
+      <div style={{ color: "#e0d7c6", marginBottom: 8, fontSize: 11, letterSpacing: 4, textTransform: "uppercase" }}>Floor Plan</div>
+      <h1 style={{ color: "#f5c842", fontFamily: "Georgia, serif", fontSize: 22, margin: "0 0 4px" }}>Garage → Living Room</h1>
+      <div style={{ color: "#888", fontSize: 12, marginBottom: 20 }}>63 × 37 units · Opening: 20–40 on dining wall</div>
+
+      {/* Controls */}
+      <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
+        {[
+          { label: "Dimensions", state: showDimensions, set: setShowDimensions },
+          { label: "Furniture", state: showFurniture, set: setShowFurniture },
+        ].map(({ label, state, set }) => (
+          <button key={label} onClick={() => set(!state)} style={{
+            padding: "6px 16px", borderRadius: 20,
+            background: state ? "#f5c842" : "transparent",
+            color: state ? "#1a1a2e" : "#f5c842",
+            border: "1.5px solid #f5c842",
+            fontSize: 11, cursor: "pointer", fontFamily: "monospace", letterSpacing: 1,
+          }}>{label}</button>
+        ))}
+      </div>
+
+      <svg width={canvasW} height={canvasH} style={{ background: "#13131f", borderRadius: 8, boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
+
+        {/* ── DINING ROOM (above the opening) ── */}
+        <rect
+          x={pad} y={pad - 50}
+          width={W * SCALE} height={50}
+          fill="#2a2a3e" stroke="#444" strokeWidth={1}
+          strokeDasharray="4 3"
+        />
+        <text x={pad + (W * SCALE) / 2} y={pad - 22} textAnchor="middle" fill="#666" fontSize={10} fontFamily="monospace">DINING ROOM</text>
+
+        {/* ── GARAGE / LIVING ROOM ── */}
+
+        {/* Floor fill */}
+        <rect
+          x={pad} y={pad}
+          width={W * SCALE} height={H * SCALE}
+          fill="#1e2a1e" stroke="none"
+        />
+
+        {/* Floor texture dots */}
+        {Array.from({ length: 8 }).map((_, row) =>
+          Array.from({ length: 14 }).map((_, col) => (
+            <circle
+              key={`${row}-${col}`}
+              cx={pad + 18 + col * 35}
+              cy={pad + 18 + row * 28}
+              r={1.5}
+              fill="#2a3a2a"
+            />
+          ))
+        )}
+
+        {/* ── WALLS ── */}
+
+        {/* TOP WALL (63-unit wall — connects to dining — with opening 20–40) */}
+        {/* Left segment: 0 to 20 */}
+        <rect x={pad} y={pad} width={openStart * SCALE} height={8} fill="#c8b89a" />
+        {/* Right segment: 40 to 63 */}
+        <rect x={pad + openEnd * SCALE} y={pad} width={(W - openEnd) * SCALE} height={8} fill="#c8b89a" />
+
+        {/* BOTTOM WALL (63-unit wall — garage door side) */}
+        <rect x={pad} y={pad + H * SCALE - 8} width={W * SCALE} height={8} fill="#c8b89a" />
+
+        {/* LEFT WALL (37-unit wall) */}
+        <rect x={pad} y={pad} width={8} height={H * SCALE} fill="#c8b89a" />
+
+        {/* RIGHT WALL (37-unit wall) */}
+        <rect x={pad + W * SCALE - 8} y={pad} width={8} height={H * SCALE} fill="#c8b89a" />
+
+        {/* ── OPENING (20 to 40 on top wall) ── */}
+        {/* Clear opening — no wall */}
+        <rect x={pad + openStart * SCALE} y={pad - 50} width={openWidth * SCALE} height={58} fill="#1e2a1e" />
+
+        {/* Opening threshold lines */}
+        <line x1={pad + openStart * SCALE} y1={pad - 8} x2={pad + openStart * SCALE} y2={pad + 8} stroke="#f5c842" strokeWidth={2} />
+        <line x1={pad + openEnd * SCALE} y1={pad - 8} x2={pad + openEnd * SCALE} y2={pad + 8} stroke="#f5c842" strokeWidth={2} />
+
+        {/* Opening label */}
+        <rect x={pad + openStart * SCALE + 2} y={pad - 2} width={openWidth * SCALE - 4} height={12} fill="#f5c84222" stroke="#f5c842" strokeWidth={1} strokeDasharray="3 2" />
+        <text x={pad + (openStart + openEnd) / 2 * SCALE} y={pad + 8} textAnchor="middle" fill="#f5c842" fontSize={9} fontFamily="monospace">OPENING 20→40</text>
+
+        {/* ── GARAGE DOOR (bottom wall) ── */}
+        <rect x={pad + 10 * SCALE} y={pad + H * SCALE - 10} width={43 * SCALE} height={10} fill="#3a3a5a" stroke="#555" strokeWidth={1} />
+        {/* Garage door panels */}
+        {[0, 1, 2, 3].map(i => (
+          <line key={i}
+            x1={pad + 10 * SCALE + (i + 1) * (43 / 4) * SCALE}
+            y1={pad + H * SCALE - 10}
+            x2={pad + 10 * SCALE + (i + 1) * (43 / 4) * SCALE}
+            y2={pad + H * SCALE}
+            stroke="#555" strokeWidth={1}
+          />
+        ))}
+        <text x={pad + (W / 2) * SCALE} y={pad + H * SCALE - 2} textAnchor="middle" fill="#666" fontSize={8} fontFamily="monospace">GARAGE DOOR (EXISTING)</text>
+
+        {/* ── FURNITURE (Living Room Layout) ── */}
+        {showFurniture && <>
+          {/* Sofa — main (against right wall) */}
+          <rect x={pad + W * SCALE - 8 - 18 * SCALE} y={pad + 8 + 3 * SCALE} width={16 * SCALE} height={5 * SCALE} rx={3} fill="#3a5a4a" stroke="#4a7a5a" strokeWidth={1.5} />
+          <text x={pad + W * SCALE - 8 - 10 * SCALE} y={pad + 8 + 5.8 * SCALE} textAnchor="middle" fill="#6aaa8a" fontSize={9} fontFamily="monospace">SOFA</text>
+
+          {/* Sofa — side (against right wall) */}
+          <rect x={pad + W * SCALE - 8 - 5 * SCALE} y={pad + 8 + 3 * SCALE} width={4 * SCALE} height={9 * SCALE} rx={3} fill="#3a5a4a" stroke="#4a7a5a" strokeWidth={1.5} />
+
+          {/* Coffee table */}
+          <rect x={pad + W * SCALE - 8 - 16 * SCALE} y={pad + 8 + 9 * SCALE} width={8 * SCALE} height={4 * SCALE} rx={2} fill="#2a3a2a" stroke="#3a5a3a" strokeWidth={1} />
+          <text x={pad + W * SCALE - 8 - 12 * SCALE} y={pad + 8 + 11.5 * SCALE} textAnchor="middle" fill="#4a6a4a" fontSize={8} fontFamily="monospace">COFFEE TABLE</text>
+
+          {/* TV unit — against bottom wall */}
+          <rect x={pad + 8 + 5 * SCALE} y={pad + H * SCALE - 8 - 3 * SCALE} width={22 * SCALE} height={2.5 * SCALE} rx={2} fill="#2a2a4a" stroke="#3a3a6a" strokeWidth={1.5} />
+          <text x={pad + 8 + 16 * SCALE} y={pad + H * SCALE - 8 - 1.5 * SCALE} textAnchor="middle" fill="#5a5a8a" fontSize={9} fontFamily="monospace">TV UNIT</text>
+
+          {/* TV screen */}
+          <rect x={pad + 8 + 9 * SCALE} y={pad + H * SCALE - 8 - 6 * SCALE} width={14 * SCALE} height={3 * SCALE} rx={2} fill="#1a1a3a" stroke="#4a4a8a" strokeWidth={1.5} />
+          <text x={pad + 8 + 16 * SCALE} y={pad + H * SCALE - 8 - 4.2 * SCALE} textAnchor="middle" fill="#4a4a8a" fontSize={8} fontFamily="monospace">TV</text>
+
+          {/* Armchair */}
+          <rect x={pad + 8 + 2 * SCALE} y={pad + 8 + 3 * SCALE} width={5 * SCALE} height={5 * SCALE} rx={3} fill="#4a4a3a" stroke="#6a6a4a" strokeWidth={1.5} />
+          <text x={pad + 8 + 4.5 * SCALE} y={pad + 8 + 6 * SCALE} textAnchor="middle" fill="#8a8a5a" fontSize={8} fontFamily="monospace">CHAIR</text>
+
+          {/* Bookshelf — left wall */}
+          <rect x={pad + 8} y={pad + 8 + 10 * SCALE} width={3 * SCALE} height={10 * SCALE} rx={1} fill="#3a2a1a" stroke="#5a4a2a" strokeWidth={1} />
+          <text x={pad + 8 + 1.5 * SCALE} y={pad + 8 + 15 * SCALE} textAnchor="middle" fill="#6a5a3a" fontSize={8} fontFamily="monospace" transform={`rotate(-90, ${pad + 8 + 1.5 * SCALE}, ${pad + 8 + 15 * SCALE})`}>SHELVES</text>
+
+          {/* Plants */}
+          <circle cx={pad + 8 + 4 * SCALE} cy={pad + H * SCALE - 8 - 4 * SCALE} r={8} fill="#1a3a1a" stroke="#2a5a2a" strokeWidth={1} />
+          <circle cx={pad + W * SCALE - 8 - 2 * SCALE} cy={pad + 8 + 15 * SCALE} r={7} fill="#1a3a1a" stroke="#2a5a2a" strokeWidth={1} />
+          <text x={pad + 8 + 4 * SCALE} cy={pad + H * SCALE - 8 - 4 * SCALE} fill="#2a5a2a" fontSize={8}>🌿</text>
+
+          {/* Rug */}
+          <rect x={pad + W * SCALE - 8 - 17 * SCALE} y={pad + 8 + 8 * SCALE} width={14 * SCALE} height={10 * SCALE} rx={2} fill="none" stroke="#5a4a2a" strokeWidth={1} strokeDasharray="3 2" />
+        </>}
+
+        {/* ── DIMENSIONS ── */}
+        {showDimensions && <>
+          {/* Top dimension (W = 63) */}
+          <line x1={pad} y1={pad - 55} x2={pad + W * SCALE} y2={pad - 55} stroke="#aaa" strokeWidth={1} markerEnd="url(#arrow)" markerStart="url(#arrow)" />
+          <text x={pad + (W * SCALE) / 2} y={pad - 58} textAnchor="middle" fill="#ccc" fontSize={11} fontFamily="monospace">63 units</text>
+
+          {/* Left dimension (H = 37) */}
+          <line x1={pad - 35} y1={pad} x2={pad - 35} y2={pad + H * SCALE} stroke="#aaa" strokeWidth={1} />
+          <line x1={pad - 40} y1={pad} x2={pad - 30} y2={pad} stroke="#aaa" strokeWidth={1} />
+          <line x1={pad - 40} y1={pad + H * SCALE} x2={pad - 30} y2={pad + H * SCALE} stroke="#aaa" strokeWidth={1} />
+          <text x={pad - 42} y={pad + (H * SCALE) / 2} textAnchor="middle" fill="#ccc" fontSize={11} fontFamily="monospace" transform={`rotate(-90, ${pad - 42}, ${pad + (H * SCALE) / 2})`}>37 units</text>
+
+          {/* Opening dimension */}
+          <line x1={pad + openStart * SCALE} y1={pad - 15} x2={pad + openEnd * SCALE} y2={pad - 15} stroke="#f5c842" strokeWidth={1} />
+          <line x1={pad + openStart * SCALE} y1={pad - 20} x2={pad + openStart * SCALE} y2={pad - 10} stroke="#f5c842" strokeWidth={1} />
+          <line x1={pad + openEnd * SCALE} y1={pad - 20} x2={pad + openEnd * SCALE} y2={pad - 10} stroke="#f5c842" strokeWidth={1} />
+          <text x={pad + (openStart + openEnd) / 2 * SCALE} y={pad - 18} textAnchor="middle" fill="#f5c842" fontSize={10} fontFamily="monospace">20 units</text>
+
+          {/* Left wall to opening */}
+          <line x1={pad} y1={pad - 30} x2={pad + openStart * SCALE} y2={pad - 30} stroke="#888" strokeWidth={1} />
+          <line x1={pad} y1={pad - 35} x2={pad} y2={pad - 25} stroke="#888" strokeWidth={1} />
+          <line x1={pad + openStart * SCALE} y1={pad - 35} x2={pad + openStart * SCALE} y2={pad - 25} stroke="#888" strokeWidth={1} />
+          <text x={pad + openStart / 2 * SCALE} y={pad - 33} textAnchor="middle" fill="#888" fontSize={9} fontFamily="monospace">20</text>
+
+          {/* Opening to right wall */}
+          <line x1={pad + openEnd * SCALE} y1={pad - 30} x2={pad + W * SCALE} y2={pad - 30} stroke="#888" strokeWidth={1} />
+          <line x1={pad + openEnd * SCALE} y1={pad - 35} x2={pad + openEnd * SCALE} y2={pad - 25} stroke="#888" strokeWidth={1} />
+          <line x1={pad + W * SCALE} y1={pad - 35} x2={pad + W * SCALE} y2={pad - 25} stroke="#888" strokeWidth={1} />
+          <text x={pad + (openEnd + W) / 2 * SCALE} y={pad - 33} textAnchor="middle" fill="#888" fontSize={9} fontFamily="monospace">23</text>
+
+          {/* Room label */}
+          <text x={pad + 8 + 10 * SCALE} y={pad + 20} fill="#4a7a4a" fontSize={11} fontFamily="monospace" fontWeight="bold">LIVING ROOM</text>
+          <text x={pad + 8 + 10 * SCALE} y={pad + 33} fill="#3a5a3a" fontSize={9} fontFamily="monospace">63 × 37 = 2,331 sq units</text>
+        </>}
+
+        {/* Compass */}
+        <text x={pad + W * SCALE - 20} y={pad + 25} fill="#555" fontSize={14}>↑</text>
+        <text x={pad + W * SCALE - 22} y={pad + 36} fill="#555" fontSize={9} fontFamily="monospace">N</text>
+
+        {/* Arrow markers */}
+        <defs>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#aaa" />
+          </marker>
+        </defs>
+
+      </svg>
+
+      {/* Legend */}
+      <div style={{ display: "flex", gap: 20, marginTop: 16, flexWrap: "wrap", justifyContent: "center" }}>
+        {[
+          { color: "#c8b89a", label: "Walls" },
+          { color: "#f5c842", label: "Opening (Dining → Living)" },
+          { color: "#3a5a4a", label: "Seating" },
+          { color: "#2a2a4a", label: "TV Unit" },
+          { color: "#3a5a6a", label: "Garage Door (existing)" },
+        ].map(({ color, label }) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 12, height: 12, background: color, borderRadius: 2 }} />
+            <span style={{ color: "#888", fontSize: 11, fontFamily: "monospace" }}>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ marginTop: 12, color: "#555", fontSize: 11, fontFamily: "monospace", textAlign: "center" }}>
+        Toggle dimensions and furniture using buttons above
+      </div>
+    </div>
+  );
+}
