@@ -1,237 +1,746 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khushbu Bang – Data Engineer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khushbu Bang – Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b10;
+    --surface: #0e1219;
+    --border: #1a2030;
+    --accent: #00e5ff;
+    --accent2: #7b61ff;
+    --text: #e8eaf0;
+    --muted: #5a6480;
+    --card: #0c111a;
+  }
 
-        /* Particle background container */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Header / Hero Section */
-        header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        header .typing {
-            font-size: 1.5em;
-            color: #ffd700;
-            height: 30px;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* Skills Section */
-        section.skills {
-            padding: 80px 20px;
-            background-color: #f5f7fa;
-            text-align: center;
-        }
-        section.skills h2 {
-            font-size: 2.5em;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-        .skill-bar {
-            width: 80%;
-            max-width: 700px;
-            background-color: #e0e0e0;
-            border-radius: 50px;
-            margin: 20px auto;
-            overflow: hidden;
-            position: relative;
-        }
-        .skill-bar span {
-            display: block;
-            height: 30px;
-            line-height: 30px;
-            color: #fff;
-            background-color: #3498db;
-            width: 0;
-            border-radius: 50px;
-            text-align: right;
-            padding-right: 10px;
-            font-weight: bold;
-            transition: width 2s ease-in-out;
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-        /* Portfolio / Experience Section */
-        section.experience {
-            padding: 80px 20px;
-            background-color: #fff;
-        }
-        section.experience h2 {
-            font-size: 2.5em;
-            margin-bottom: 50px;
-            text-align: center;
-            color: #2c3e50;
-        }
-        .job-card {
-            background-color: #f5f7fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 900px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .job-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        .job-card h3 {
-            color: #34495e;
-            margin-bottom: 5px;
-        }
-        .job-card .dates {
-            font-style: italic;
-            color: #777;
-            margin-bottom: 15px;
-        }
-        .job-card ul {
-            list-style: disc;
-            padding-left: 20px;
-        }
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
 
-        /* Smooth scroll */
-        html { scroll-behavior: smooth; }
-    </style>
+  /* Grid background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(8,11,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(123,97,255,0.05) 0%, transparent 70%);
+    top: 20%;
+    right: 10%;
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 900px; position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 2px;
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero h1 .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(232,234,240,0.3);
+  }
+
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero-desc {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 14px 28px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #33eaff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 14px 28px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--surface);
+  }
+
+  .stat {
+    padding: 0 32px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { background: #0f1520; border-color: rgba(0,229,255,0.15); }
+
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .skill-bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 0;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* EXPERIENCE */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 56px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -38px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    border-radius: 50%;
+  }
+
+  .timeline-dot.active {
+    background: var(--accent);
+    box-shadow: 0 0 16px rgba(0,229,255,0.5);
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timeline-company {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+  }
+
+  .timeline-date {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.15);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .timeline-role {
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .timeline-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .timeline-points li {
+    color: #8090b0;
+    font-size: 13px;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .timeline-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s;
+  }
+
+  .contact-card:hover {
+    border-color: rgba(0,229,255,0.2);
+    background: #0f1520;
+  }
+
+  .contact-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .contact-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px; }
+    section { padding: 60px 24px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
+<nav>
+  <div class="nav-logo">KB<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- Header / Hero -->
-    <header>
-        <h1>Khushbu Bang</h1>
-        <div class="typing"></div>
-    </header>
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>
+      Khushbu<br>
+      <span class="line2">Bang</span><span class="accent">.</span>
+    </h1>
+    <p class="hero-desc">
+      Senior Data Engineer with 12+ years building high-performance ETL pipelines, 
+      cloud data platforms, and scalable data architectures across banking, insurance, 
+      and higher education.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View Experience →</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Skills -->
-    <section class="skills" id="skills">
-        <h2>Skills</h2>
-        <div class="skill-bar"><span data-skill="Databricks" data-percent="90%">Databricks 90%</span></div>
-        <div class="skill-bar"><span data-skill="Python / Airflow" data-percent="85%">Python / Airflow 85%</span></div>
-        <div class="skill-bar"><span data-skill="SQL / Teradata" data-percent="95%">SQL / Teradata 95%</span></div>
-        <div class="skill-bar"><span data-skill="ETL / Data Pipelines" data-percent="90%">ETL / Data Pipelines 90%</span></div>
-        <div class="skill-bar"><span data-skill="Cloud Platforms" data-percent="80%">Cloud Platforms 80%</span></div>
-    </section>
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-number">12+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">5</div>
+    <div class="stat-label">Companies</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">40%</div>
+    <div class="stat-label">Query Performance Gain</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">95%</div>
+    <div class="stat-label">Match Accuracy</div>
+  </div>
+</div>
 
-    <!-- Experience -->
-    <section class="experience" id="experience">
-        <h2>Professional Experience</h2>
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-name">SQL / Teradata <span class="skill-pct">95%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="95%"></div></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-name">ETL / Data Pipelines <span class="skill-pct">90%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="90%"></div></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-name">Databricks <span class="skill-pct">90%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="90%"></div></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-name">Python / Airflow <span class="skill-pct">85%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="85%"></div></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-name">Cloud Platforms <span class="skill-pct">80%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="80%"></div></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-name">Azure Data Factory <span class="skill-pct">85%</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:0" data-width="85%"></div></div>
+    </div>
+  </div>
+</section>
 
-        <div class="job-card">
-            <h3>Monash University – Data & Transformation Support</h3>
-            <div class="dates">Dec 2025 – Present</div>
-            <ul>
-                <li>Supported large-scale data migration to Ellucian Banner SaaS.</li>
-                <li>Optimized Databricks pipelines with master notebook & parameterized datasets.</li>
-                <li>Collaborated with BAs to transform source Callista data per requirements.</li>
-                <li>Performed data validation & reconciliation ensuring high accuracy.</li>
-            </ul>
-        </div>
+<section id="experience" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-header">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
 
-        <div class="job-card">
-            <h3>ANZ Bank – Senior Data Engineer / Data Analyst</h3>
-            <div class="dates">Sep 2022 – Dec 2025</div>
-            <ul>
-                <li>Designed ETL pipelines using Python, Airflow, dbt, Medallion architecture.</li>
-                <li>Improved query performance by 40% & reduced manual effort.</li>
-                <li>Automated auto-approval process achieving 95% match accuracy.</li>
-                <li>Mentored team on SQL optimization & Python best practices.</li>
-            </ul>
-        </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot active"></div>
+      <div class="timeline-header">
+        <div class="timeline-company">Monash University</div>
+        <div class="timeline-date">Dec 2025 – Present</div>
+      </div>
+      <div class="timeline-role">Data & Transformation Support</div>
+      <ul class="timeline-points">
+        <li>Supported large-scale data migration to Ellucian Banner SaaS</li>
+        <li>Optimized Databricks pipelines with master notebook & parameterized datasets</li>
+        <li>Collaborated with BAs to transform source Callista data per requirements</li>
+        <li>Performed data validation & reconciliation ensuring high accuracy</li>
+      </ul>
+    </div>
 
-        <div class="job-card">
-            <h3>AIA Australia Ltd – Senior Data Engineer (DataStage)</h3>
-            <div class="dates">Aug 2016 – Aug 2022</div>
-            <ul>
-                <li>Designed ETL workflows, DataStage jobs, and real-time data replication.</li>
-                <li>Maintained Azure Data Factory, Spark SQL & Azure Data Lake pipelines.</li>
-                <li>Delivered projects defect-free, improving data quality & automation.</li>
-            </ul>
-        </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div class="timeline-company">ANZ Bank</div>
+        <div class="timeline-date">Sep 2022 – Dec 2025</div>
+      </div>
+      <div class="timeline-role">Senior Data Engineer / Data Analyst</div>
+      <ul class="timeline-points">
+        <li>Designed ETL pipelines using Python, Airflow, dbt, Medallion architecture</li>
+        <li>Improved query performance by 40% & reduced manual effort significantly</li>
+        <li>Automated auto-approval process achieving 95% match accuracy</li>
+        <li>Mentored team on SQL optimization & Python best practices</li>
+      </ul>
+    </div>
 
-        <div class="job-card">
-            <h3>Tech Mahindra – ETL Developer (DataStage Specialist)</h3>
-            <div class="dates">Mar 2016 – Jul 2016</div>
-            <ul>
-                <li>Developed DataStage jobs for integration projects and secure transfers.</li>
-                <li>Coordinated deployments via Control-M.</li>
-            </ul>
-        </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div class="timeline-company">AIA Australia</div>
+        <div class="timeline-date">Aug 2016 – Aug 2022</div>
+      </div>
+      <div class="timeline-role">Senior Data Engineer (DataStage)</div>
+      <ul class="timeline-points">
+        <li>Designed ETL workflows, DataStage jobs, and real-time data replication</li>
+        <li>Maintained Azure Data Factory, Spark SQL & Azure Data Lake pipelines</li>
+        <li>Delivered projects defect-free, improving data quality & automation</li>
+      </ul>
+    </div>
 
-        <div class="job-card">
-            <h3>IBM India Pvt Ltd – ETL Developer / Teradata DBA</h3>
-            <div class="dates">Apr 2012 – Mar 2016</div>
-            <ul>
-                <li>Built ETL pipelines integrating Oracle, SQL Server, XML & flat files.</li>
-                <li>Managed database administration & improved Teradata performance.</li>
-            </ul>
-        </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div class="timeline-company">Tech Mahindra</div>
+        <div class="timeline-date">Mar 2016 – Jul 2016</div>
+      </div>
+      <div class="timeline-role">ETL Developer (DataStage Specialist)</div>
+      <ul class="timeline-points">
+        <li>Developed DataStage jobs for integration projects and secure transfers</li>
+        <li>Coordinated deployments via Control-M</li>
+      </ul>
+    </div>
 
-    </section>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div class="timeline-company">IBM India</div>
+        <div class="timeline-date">Apr 2012 – Mar 2016</div>
+      </div>
+      <div class="timeline-role">ETL Developer / Teradata DBA</div>
+      <ul class="timeline-points">
+        <li>Built ETL pipelines integrating Oracle, SQL Server, XML & flat files</li>
+        <li>Managed database administration & improved Teradata performance</li>
+      </ul>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        /* Particle.js config */
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80 },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 3 }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
-            },
-            "retina_detect": true
-        });
+  </div>
+</section>
 
-        /* Typed.js animation */
-        new Typed('.typing', {
-            strings: ['Data Engineer', 'Data Platform Specialist', 'ETL & Cloud Engineer'],
-            typeSpeed: 100,
-            backSpeed: 50,
-            loop: true
-        });
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card fade-up">
+      <div class="contact-label">Location</div>
+      <div class="contact-value">Melbourne, AU</div>
+    </div>
+    <div class="contact-card fade-up">
+      <div class="contact-label">Role</div>
+      <div class="contact-value">Senior Data Engineer</div>
+    </div>
+    <div class="contact-card fade-up" style="grid-column: 1 / -1;">
+      <div class="contact-label">Open to</div>
+      <div class="contact-value">Full-time · Contract · Remote</div>
+    </div>
+  </div>
+</section>
 
-        /* Skill bar animation */
-        window.addEventListener('scroll', () => {
-            const skillSpans = document.querySelectorAll('.skill-bar span');
-            skillSpans.forEach(span => {
-                const rect = span.getBoundingClientRect();
-                if(rect.top < window.innerHeight) {
-                    span.style.width = span.getAttribute('data-percent');
-                }
-            });
-        });
-    </script>
+<footer>
+  <div>Khushbu Bang © 2026</div>
+  <div>Data Engineer · Melbourne, AU</div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+          // Animate skill bars
+          const fill = entry.target.querySelector('.skill-fill');
+          if (fill) {
+            fill.style.width = fill.dataset.width;
+          }
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
